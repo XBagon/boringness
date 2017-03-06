@@ -1,18 +1,20 @@
-var gridwidth = 25;
+var gridwidth = 55;
 var grid = [];
 var position = {x:0,y:0};
 var way = [];
 var frames = 0;
 var direction;
+var speedslider;
+var zoomslider;
 
 function setup(){
   createCanvas(500,500);
   background(0);
-  for (var i = 0; i < gridwidth; i++) {
-    for (var j = 0; j < gridwidth; j++) {
-      grid[[i,j]] = new Cell({x:i,y:j},20);
-    }
-  }
+
+  speedslider =  createSlider(0,30,10,1);
+  zoomslider = createSlider(3,50,25,1);
+
+  resetGrid();
 
   way[[0,0]]=true;
 
@@ -20,7 +22,20 @@ function setup(){
 
 }
 
+function resetGrid(){
+  gridwidth = zoomslider.value();
+  grid = [];
+  for (var i = 0; i < gridwidth; i++) {
+    for (var j = 0; j < gridwidth; j++) {
+      grid[[i,j]] = new Cell({x:i,y:j},width/gridwidth);
+    }
+  }
+}
+
+
 function draw(){
+  if(zoomslider!=gridwidth)resetGrid();
+
   loadPixels();
   for (var i = 0; i < gridwidth; i++) {
     for (var j = 0; j < gridwidth; j++) {
@@ -28,7 +43,7 @@ function draw(){
     }
   }
 
-    if(frames%10==0){
+    if(frames%(floor(30/speedslider.value()))==0){
 
       if(random()>0.8){
         var arr = abbiegen(direction);
@@ -55,11 +70,11 @@ function draw(){
 
   }
 }
-
-
   way[[position.x,position.y]]=true;
 
   frames++;
+
+  console.log(frameRate());
 }
 
 function abbiegen(dir){
