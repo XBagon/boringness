@@ -36,7 +36,6 @@ function resetGrid(){
 function draw(){
   if(zoomslider!=gridwidth)resetGrid();
 
-  loadPixels();
   for (var i = 0; i < gridwidth; i++) {
     for (var j = 0; j < gridwidth; j++) {
       grid[[i,j]].draw();
