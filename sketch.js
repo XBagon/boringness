@@ -72,8 +72,6 @@ function draw(){
   way[[position.x,position.y]]=true;
 
   frames++;
-
-  console.log(frameRate());
 }
 
 function abbiegen(dir){
