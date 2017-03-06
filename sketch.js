@@ -3,8 +3,6 @@ var grid = [];
 var position = {x:0,y:0};
 var way = [];
 var direction;
-var speedslider;
-var zoomslider;
 
 function setup(){
   createCanvas(500,500);
@@ -12,6 +10,7 @@ function setup(){
 
   speedslider =  createSlider(0,30,10,1);
   zoomslider = createSlider(3,50,25,1);
+  turnslider = createSlider(0,1,0.2,0.01);
 
   resetGrid();
 
@@ -41,19 +40,12 @@ function draw(){
     }
   }
 
+
+
     if(frameCount%(floor(30/speedslider.value()))==0){
-
-      if(random()>0.8){
-        var arr = abbiegen(direction);
-        if(random()<0.9){
-          direction=arr[0];
-        }
-        else{
-          direction=arr[1];
-        }
+      if(random()>1-turnslider.value()){
+        direction = random(abbiegen(direction));
       }
-
-
 
       switch (direction) {
       case 'E': position.x++;
@@ -64,12 +56,12 @@ function draw(){
         break;
       case 'N': position.y--;
         break;
+      }
+    }
 
-
-  }
-}
   way[[position.x,position.y]]=true;
 }
+
 
 function abbiegen(dir){
   switch (dir) {
