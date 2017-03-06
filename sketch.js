@@ -2,7 +2,6 @@ var gridwidth = 55;
 var grid = [];
 var position = {x:0,y:0};
 var way = [];
-var frames = 0;
 var direction;
 var speedslider;
 var zoomslider;
@@ -42,7 +41,7 @@ function draw(){
     }
   }
 
-    if(frames%(floor(30/speedslider.value()))==0){
+    if(frameCount%(floor(30/speedslider.value()))==0){
 
       if(random()>0.8){
         var arr = abbiegen(direction);
@@ -70,8 +69,6 @@ function draw(){
   }
 }
   way[[position.x,position.y]]=true;
-
-  frames++;
 }
 
 function abbiegen(dir){
