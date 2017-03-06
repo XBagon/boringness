@@ -87,7 +87,7 @@ function Cell(pos,cellwidth){
     if(way[[this.pos.x - floor(gridwidth/2) + position.x, this.pos.y - floor(gridwidth/2) + position.y]]){
             red = 200;
     }
-    var noiseval = map(noise(0,(this.pos.x + position.x) /10,(this.pos.y  + position.y)/10),0,1,100,255);
+    var noiseval = map(noise(0,(this.pos.x + position.x) /10 +1000,(this.pos.y  + position.y)/10 +1000),0,1,100,255);
     fill(red,noiseval,0,255);
     rect(pos.x*cellwidth,pos.y*cellwidth,cellwidth,cellwidth);
   }
